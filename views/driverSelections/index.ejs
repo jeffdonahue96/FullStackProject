@@ -1,0 +1,10 @@
+<h2>Search Drivers</h2>
+<form action="/driverSelections" method="GET">
+    <label>Name</label>
+    <input type="text" name="name" value="<%= searchOptions.name %>">
+    <button type="submit">Search</button>
+</form>
+<br>
+<% driverSelections.forEach(driverSelection =>{ %>
+    <div><%= driverSelection.name  %></div> 
+<% }) %>

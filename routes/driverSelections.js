@@ -2,7 +2,7 @@
 
 const express = require('express')
 const router = express.Router()
-const Author = require('../models/author')
+const DriverSelection = require('../models/driverSelection')
 
 
 //all authors route
@@ -12,9 +12,9 @@ router.get('/', async (req, res) => {
         searchOptions.name = new RegExp(req.query.name, 'i')
     }
     try {
-        const authors = await Author.find(searchOptions)
-        res.render('authors/index', {
-            authors: authors,
+        const driverSelections = await DriverSelection.find(searchOptions)
+        res.render('driverSelections/index', {
+            driverSelections: driverSelections,
             searchOptions: req.query
         })
 
@@ -27,22 +27,22 @@ router.get('/', async (req, res) => {
 
 //New author route
 router.get('/new', (req, res) =>{
-    res.render('authors/new', {author: new Author()})
+    res.render('driverSelections/new', {driverSelection: new DriverSelection()})
 })
 
 //Create author route
 router.post('/', async (req, res) => {
-    const author = new Author({
+    const driverSelection = new DriverSelection({
         name: req.body.name
     })
     try{
-    const newAuthor = await author.save()
-    res.redirect(`authors`)
+    const newSelection = await driverSelection.save()
+    res.redirect(`driverSelections`)
     }
     catch{
-        res.render('authors/new',{
-            author: author,
-            errorMessage:'Error Creating Author...'
+        res.render('driverSelections/new',{
+            driverSelection: driverSelection,
+            errorMessage:'Error Creating Driver Selection...'
         })
     }
 
